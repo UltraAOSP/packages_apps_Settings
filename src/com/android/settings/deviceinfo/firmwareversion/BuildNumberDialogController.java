@@ -22,6 +22,8 @@ import android.text.BidiFormatter;
 
 import com.android.settings.R;
 
+import android.os.SystemProperties;
+
 public class BuildNumberDialogController {
 
     @VisibleForTesting
@@ -33,11 +35,24 @@ public class BuildNumberDialogController {
         mDialog = dialog;
     }
 
+    private String getaostVersion(){
+        String buildDate = SystemProperties.get("org.aost.build_date","");
+        String buildType = SystemProperties.get("org.aost.build_type","unofficial").toUpperCase();
+        return buildDate.equals("") ? "" : "UltraAOST-" + buildDate + "-" + buildType;
+    }
+
     /**
      * Updates the build number to the dialog.
      */
     public void initialize() {
-        mDialog.setText(BUILD_NUMBER_VALUE_ID,
-                BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY));
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY));
+        String aostVersion = getaostVersion();
+        if (!aostVersion.equals("")){
+            sb.append("\n");
+            sb.append(aostVersion);
+        }
+        mDialog.setText(BUILD_NUMBER_VALUE_ID, sb.toString());
     }
 }
