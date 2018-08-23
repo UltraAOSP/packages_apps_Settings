@@ -3326,13 +3326,14 @@
         <service android:name=".fuelgauge.batterytip.AnomalyDetectionJobService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <!-- AostSettings -->
+<!-- Start AostSettings -->
+	<!-- STATUSBAR -->
         <activity android:name=".Settings$AostSettingsActivity"
-            android:label="@string/aost_settings_title"
-            android:icon="@drawable/ic_settings_aost"
+            android:label="@string/aost_statusbar_settings_title"
+            android:icon="@drawable/ic_settings_statusbar"
             android:taskAffinity="">
             <intent-filter android:priority="1">
-                <action android:name="com.aost.settings.AostSettings" />
+                <action android:name="com.aost.settings.StatusBarSettings" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -3345,15 +3346,15 @@
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.homepage" />
+                android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.aost.settings.AostSettings" />
+                android:value="com.aost.settings.StatusBarSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
             <meta-data android:name="com.android.settings.summary"
-                android:resource="@string/aost_settings_summary"/>
+                android:resource="@string/aost_statusbar_settings_summary"/>
         </activity>
-
+<!-- End AostSettings -->
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
