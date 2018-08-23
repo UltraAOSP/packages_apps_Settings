@@ -19,5 +19,8 @@
     <!-- StatusBar Settings -->
     <string name="aost_statusbar_settings_title">StatusBar Settings</string>
     <string name="aost_statusbar_settings_summary">Additional Settings for statusbar</string>
+    <!-- Personalization -->
+    <string name="aost_personalization_settings_title">Personalization</string>
+    <string name="aost_personalization_settings_summary">Choose Rom colors</string>
 
 </resources>
