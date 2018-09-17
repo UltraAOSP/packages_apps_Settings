@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2018 PixysOS
+     Copyright (C) 2018 UltraAOST
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
@@ -12,6 +12,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Fingerprint sensor locations.  Devices should configure their sensor location using
+         config_fingerprintSensorLocation -->
+    <string-array name="security_settings_fingerprint_sensor_locations" translatable="false">
+        <item>@string/security_settings_fingerprint_enroll_find_sensor_message</item>
+        <item>@string/security_settings_fingerprint_enroll_find_sensor_message_front</item>
+        <item>@string/security_settings_fingerprint_enroll_find_sensor_message_left</item>
+        <item>@string/security_settings_fingerprint_enroll_find_sensor_message_right</item>
+    </string-array>
 
     <!-- System theme -->
     <string-array name="system_theme_style_entries" translatable="false">
