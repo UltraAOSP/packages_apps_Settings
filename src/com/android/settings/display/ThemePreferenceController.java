@@ -13,6 +13,7 @@
  */
 package com.android.settings.display;
 
+import android.content.Intent;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -24,6 +25,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -114,6 +116,12 @@ public class ThemePreferenceController extends AbstractPreferenceController impl
             return true;
         }
         mOverlayService.setEnabledExclusiveInCategory((String) newValue, UserHandle.myUserId());
+        Toast.makeText(mContext, mContext.getString(R.string.theme_applied_toast),
+            Toast.LENGTH_LONG).show();
+        Intent goHome = new Intent(Intent.ACTION_MAIN);
+        goHome.addCategory(Intent.CATEGORY_HOME);
+        goHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(goHome);
         return true;
     }
 
@@ -133,7 +141,9 @@ public class ThemePreferenceController extends AbstractPreferenceController impl
         List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
                 UserHandle.myUserId());
         for (int i = 0, size = infos.size(); i < size; i++) {
-            if (infos.get(i).isEnabled() && isTheme(infos.get(i))) {
+            if (infos.get(i).isEnabled() && isTheme(infos.get(i)) &&
+                        !infos.get(i).packageName.equals("com.android.system.theme.dark") &&
+                        !infos.get(i).packageName.equals("com.android.system.theme.black")) {
                 return infos.get(i).packageName;
             }
         }
@@ -160,7 +170,10 @@ public class ThemePreferenceController extends AbstractPreferenceController impl
         List<String> pkgs = new ArrayList<>(infos.size());
         for (int i = 0, size = infos.size(); i < size; i++) {
             if (isTheme(infos.get(i))) {
-                pkgs.add(infos.get(i).packageName);
+                if (!infos.get(i).packageName.equals("com.android.system.theme.dark") && 
+                    !infos.get(i).packageName.equals("com.android.system.theme.black")) {
+                    pkgs.add(infos.get(i).packageName);
+                }
             }
         }
         return pkgs.toArray(new String[pkgs.size()]);
